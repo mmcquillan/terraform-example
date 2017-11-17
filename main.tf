@@ -1,11 +1,13 @@
-resource "random_id" "random" {
-  keepers {
-    uuid = "${uuid()}"
+variable "sleep_seconds" {
+  default = 60
+}
+
+resource "null_resource" "sleepy" {
+  triggers {
+    always_trigger = "${uuid()}"
   }
-
-  byte_length = 8
+  provisioner "local-exec" {
+    command = "/bin/bash -c \"echo 'Sleeping for ${var.sleep_seconds} seconds...'; sleep ${var.sleep_seconds}; echo '...done'\""
+  }
 }
 
-output "random" {
-  value = "${random_id.random.hex}"
-}
