@@ -7,7 +7,6 @@ resource "null_resource" "sleepy" {
     always_trigger = "${uuid()}"
   }
   provisioner "local-exec" {
-    command = "/bin/bash -c \"echo 'Sleeping for ${var.sleep_seconds} seconds...'; sleep ${var.sleep_seconds}; echo '...done'\""
+    command = "/bin/bash -c \"trap -p SIGINT; echo 'Sleeping for ${var.sleep_seconds} seconds...'; sleep ${var.sleep_seconds}; echo '...done'\""
   }
 }
-
