@@ -1,5 +1,5 @@
 variable "sleep_seconds" {
-  default = 30
+  default = 60
 }
 
 resource "null_resource" "sleepy" {
